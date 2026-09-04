@@ -1,0 +1,135 @@
+name: Publish APT Repository
+
+# This workflow is manually triggered to rebuild the APT index from published
+# release assets of the two source repositories. Automatic dispatch calls from
+# the source release workflows are wired up in a later phase.
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+    inputs:
+      plugin_ref:
+        description: "dovecot-xaps-plugin release tag (e.g. v1.0.0)"
+        required: false
+        default: ""
+      daemon_ref:
+        description: "dovecot-xaps-daemon release tag (e.g. v0.0.1)"
+        required: false
+        default: ""
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y reprepro lintian dpkg-dev gpg
+
+      - name: Import signing key
+        env:
+          APT_SIGNING_PRIVATE_KEY: ${{ secrets.APT_SIGNING_PRIVATE_KEY }}
+        run: |
+          echo "${APT_SIGNING_PRIVATE_KEY}" | gpg --batch --import
+          gpg --batch --list-secret-keys --with-fingerprint
+
+      - name: Download plugin package
+        if: ${{ inputs.plugin_ref != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF: ${{ inputs.plugin_ref }}
+        run: |
+          mkdir -p /tmp/pkgs
+          gh release download "${REF}" \
+            --repo timlaing/dovecot-xaps-plugin \
+            --pattern "*.deb" \
+            --dir /tmp/pkgs
+
+      - name: Download daemon package
+        if: ${{ inputs.daemon_ref != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF: ${{ inputs.daemon_ref }}
+        run: |
+          mkdir -p /tmp/pkgs
+          gh release download "${REF}" \
+            --repo timlaing/dovecot-xaps-daemon \
+            --pattern "*.deb" \
+            --dir /tmp/pkgs
+
+      - name: Lint packages
+        run: |
+          set -euo pipefail
+          if ls /tmp/pkgs/*.deb >/dev/null 2>&1; then
+            for deb in /tmp/pkgs/*.deb; do
+              echo "Linting ${deb}"
+              dpkg-deb --info "${deb}"
+              lintian --fail-on error "${deb}"
+            done
+          else
+            echo "No packages downloaded; nothing to publish."
+          fi
+
+      - name: Import packages with reprepro
+        run: |
+          set -euo pipefail
+          if ls /tmp/pkgs/*.deb >/dev/null 2>&1; then
+            for deb in /tmp/pkgs/*.deb; do
+              echo "Importing ${deb}"
+              reprepro --basedir . includedeb stable "${deb}"
+            done
+            reprepro --basedir . check
+            reprepro --basedir . export
+          else
+            echo "No packages to import; skipping."
+          fi
+
+      - name: Stage Pages artifact
+        if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pages
+          cp -r dists pool conf public-key.asc /tmp/pages/
+          touch /tmp/pages/.nojekyll
+
+      - name: Verify InRelease signature
+        if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        run: |
+          gpgv \
+            --keyring <(gpg --dearmor public-key.asc) \
+            /tmp/pages/dists/stable/InRelease
+
+      - name: Ensure no private keys in artifact
+        if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        run: |
+          if grep -rIl --include="*" "PRIVATE KEY" /tmp/pages; then
+            echo "Private key material found in artifact"
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/pages
+
+      - name: Deploy to GitHub Pages
+        if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        id: deployment
+        uses: actions/deploy-pages@v4
