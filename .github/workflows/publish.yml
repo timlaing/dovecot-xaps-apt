@@ -132,4 +132,4 @@ jobs:
       - name: Deploy to GitHub Pages
         if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
