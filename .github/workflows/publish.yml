@@ -46,8 +46,8 @@ jobs:
         run: |
           mkdir -p ~/.gnupg
           chmod 700 ~/.gnupg
-          echo "pinentry-mode loopback" > ~/.gnupg/gpg-agent.conf
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          printf 'allow-loopback-pinentry\n' > ~/.gnupg/gpg-agent.conf
+          printf 'pinentry-mode loopback\n' > ~/.gnupg/gpg.conf
           gpgconf --kill gpg-agent || true
           gpgconf --launch gpg-agent
 
