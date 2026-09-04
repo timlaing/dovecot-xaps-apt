@@ -2,7 +2,7 @@ Origin: dovecot-xaps
 Label: dovecot-xaps
 Codename: stable
 Suite: stable
-Architectures: amd64
+Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps
 SignWith: D6F47642A5424C78332CCD8EEAD2766F4E857693

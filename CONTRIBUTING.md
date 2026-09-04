@@ -30,7 +30,7 @@ prek
 
 ## Repository layout
 
-- `conf/distributions` - reprepro distribution configuration (codename `stable`, `amd64`, signed index).
+- `conf/distributions` - reprepro distribution configuration (codename `stable`, `amd64 arm64`, signed index).
 - `public-key.asc` - the APT signing key used to verify the repository.
 - `.github/workflows/` - publishing, reconciliation, and quality workflows.
 - `CHANGELOG.md` - user-facing change log (Keep a Changelog format).

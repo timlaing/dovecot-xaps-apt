@@ -32,15 +32,17 @@ jobs:
 
           published_versions() {
             local pkg="$1"
-            curl -fsSL \
-              "https://timlaing.github.io/dovecot-xaps-apt/dists/stable/main/binary-amd64/Packages" \
-              | awk -v pkg="$pkg" '
-                  $1 == "Package:" && $2 == pkg { want=1 }
-                  want && $1 == "Version:" {
-                    print $2
-                    want=0
-                  }
-                '
+            for arch in amd64 arm64; do
+              curl -fsSL \
+                "https://timlaing.github.io/dovecot-xaps-apt/dists/stable/main/binary-${arch}/Packages" \
+                || continue
+            done | awk -v pkg="$pkg" '
+                $1 == "Package:" && $2 == pkg { want=1 }
+                want && $1 == "Version:" {
+                  print $2
+                  want=0
+                }
+              ' | sort -u
           }
 
           # repo -> (publish input name, binary package name)
