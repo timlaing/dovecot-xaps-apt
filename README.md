@@ -25,7 +25,7 @@ curl -fsSL https://raw.githubusercontent.com/timlaing/dovecot-xaps-apt/main/publ
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt stable main" \
   | sudo tee /etc/apt/sources.list.d/dovecot-xaps.list
 
-sudo apt update && sudo apt install dovecot-xaps-plugin dovecot-xaps-daemon
+sudo apt update && sudo apt install dovecot-xaps-plugin xapsd
 ```
 
 ## Signing Key
