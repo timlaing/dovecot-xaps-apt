@@ -20,3 +20,9 @@ and this project adheres to [Semantic Versioning].
 ### Changed
 
 - Corrected README repository URLs from the placeholder owner to `timlaing`.
+- **Rotated the APT signing key** to a passphrase-less key (`D6F4 7642 A542 4C78 332C  CD8E EAD2 766F 4E85 7693`) so `reprepro` can sign non-interactively in CI; updated `public-key.asc`, `fingerprint`, `conf/distributions`, README, and SECURITY policy.
+- **Fixed publish workflow GPG setup**: create `~/.gnupg`, configure loopback pinentry (`gpg-agent.conf` / `gpg.conf`), and install `pinentry-curses`.
+
+### Fixed
+
+- Publish workflow no longer fails signing the repository index with `GPGME:1: General error` caused by a passphrase-protected key in a non-interactive runner.

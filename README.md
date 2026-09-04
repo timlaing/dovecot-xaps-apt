@@ -30,6 +30,6 @@ sudo apt update && sudo apt install dovecot-xaps-plugin dovecot-xaps-daemon
 
 ## Signing Key
 
-**Fingerprint:** `093A 73B6 D553 7505 EB70  F917 958C 5D29 E4E2 3742`
+**Fingerprint:** `D6F4 7642 A542 4C78 332C  CD8E EAD2 766F 4E85 7693`
 
 See [`SECURITY.md`](SECURITY.md) for key rotation and revocation procedures.
