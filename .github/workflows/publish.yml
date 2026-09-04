@@ -125,11 +125,11 @@ jobs:
 
       - name: Upload Pages artifact
         if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: /tmp/pages
 
       - name: Deploy to GitHub Pages
         if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
