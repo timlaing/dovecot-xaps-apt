@@ -120,8 +120,8 @@ jobs:
       - name: Verify InRelease signature
         if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
-          gpgv \
-            --keyring <(gpg --dearmor public-key.asc) \
+          gpg -o /tmp/apt-keyring.gpg --dearmor public-key.asc
+          gpgv --keyring /tmp/apt-keyring.gpg \
             /tmp/pages/dists/stable/InRelease
 
       - name: Ensure no private keys in artifact
