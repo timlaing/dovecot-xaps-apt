@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a problem with the Dovecot XAPS APT repository
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill out the sections below.
+
+  - type: input
+    id: os
+    attributes:
+      label: Distribution
+      description: The OS and version you are installing on
+      placeholder: "e.g. Debian 12 (bookworm) or Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: input
+    id: package
+    attributes:
+      label: Package affected
+      description: Which package and version are you trying to install?
+      placeholder: "e.g. dovecot-xaps-plugin 1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: source-entry
+    attributes:
+      label: APT source entry
+      description: Your /etc/apt/sources.list.d entry for this repository
+      placeholder: "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://... stable main"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you do, what did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: |
+        Paste the relevant output from `apt-get update`, `apt-get install`,
+        `apt-cache policy`, or `gpgv` verification of `InRelease`.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Anything else that might help (screenshots, config, etc.)
+    validations:
+      required: false

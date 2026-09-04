@@ -1,0 +1,61 @@
+name: Package / version request
+description: Request a new package or release be published in this APT repository
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository publishes prebuilt `.deb` packages from the source
+        repositories. Before requesting a package here, please confirm it has
+        been released in the relevant source repository. Packages are not built
+        in this repository — they are imported from published release assets.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description: Which package would you like to publish?
+      options:
+        - dovecot-xaps-plugin
+        - dovecot-xaps-daemon
+        - Both
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Requested version / release tag
+      description: The version tag you would like published
+      placeholder: "e.g. v1.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: published-upstream
+    attributes:
+      label: Published in source repo?
+      description: Is this release published in the source repository's GitHub releases?
+      options:
+        - Yes
+        - No (package is being built)
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: architecture
+    attributes:
+      label: Architecture
+      description: The architecture you need (default is amd64)
+      placeholder: "e.g. amd64"
+    validations:
+      required: false
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Why do you need this package or version?
+    validations:
+      required: false

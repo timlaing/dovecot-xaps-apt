@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: https://github.com/timlaing/dovecot-xaps-apt/blob/main/SECURITY.md
+    about: Read the security policy for reporting vulnerabilities and signing-key trust issues privately
+  - name: dovecot-xaps-plugin
+    url: https://github.com/timlaing/dovecot-xaps-plugin/issues
+    about: Report package build or source issues with the plugin upstream
+  - name: dovecot-xaps-daemon
+    url: https://github.com/timlaing/dovecot-xaps-daemon/issues
+    about: Report package build or source issues with the daemon upstream

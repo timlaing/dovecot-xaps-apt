@@ -1,0 +1,68 @@
+name: Security / signing key issue
+description: Report a security or package-trust problem (signing key, InRelease, package signature)
+labels: ["security"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you believe you have found a vulnerability, please report it privately
+        rather than in a public issue (see the [security policy](https://github.com/timlaing/dovecot-xaps-apt/blob/main/SECURITY.md)).
+        Use this form for reproducible trust/signature problems.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected component
+      options:
+        - Signing key
+        - InRelease / Release verification
+        - Package signature
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: expected-fingerprint
+    attributes:
+      label: Expected signing key fingerprint
+      description: The published fingerprint you are verifying against (from README / SECURITY.md)
+      placeholder: "e.g. 093A 73B6 D553 7505 EB70  F917 958C 5D29 E4E2 3742"
+    validations:
+      required: false
+
+  - type: input
+    id: observed-fingerprint
+    attributes:
+      label: Observed fingerprint
+      description: The fingerprint you actually see (if different)
+      validations:
+        required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you do (e.g. apt-get update, gpgv InRelease)?
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: |
+        Paste the relevant output from `apt-get update`, `gpgv`, or `apt-cache policy`.
+      render: text
+    validations:
+      required: false
+
+  - type: dropdown
+    id: blocking
+    attributes:
+      label: Blocks installation?
+      options:
+        - "Yes"
+        - "No"
+        - "Not sure"
+    validations:
+      required: true
