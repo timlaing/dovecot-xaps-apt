@@ -125,7 +125,7 @@ jobs:
 
       - name: Upload Pages artifact
         if: ${{ inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: /tmp/pages
 
