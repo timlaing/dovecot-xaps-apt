@@ -40,13 +40,20 @@ jobs:
       - name: Install tooling
         run: |
           sudo apt-get update
-          sudo apt-get install -y reprepro lintian dpkg-dev gpg
+          sudo apt-get install -y reprepro lintian dpkg-dev gpg pinentry-curses
+
+      - name: Configure GPG for non-interactive signing
+        run: |
+          echo "pinentry-mode loopback" > ~/.gnupg/gpg-agent.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --kill gpg-agent || true
+          gpgconf --launch gpg-agent
 
       - name: Import signing key
         env:
           APT_SIGNING_PRIVATE_KEY: ${{ secrets.APT_SIGNING_PRIVATE_KEY }}
         run: |
-          echo "${APT_SIGNING_PRIVATE_KEY}" | gpg --batch --import
+          echo "${APT_SIGNING_PRIVATE_KEY}" | gpg --batch --pinentry-mode loopback --import
           gpg --batch --list-secret-keys --with-fingerprint
 
       - name: Download plugin package
