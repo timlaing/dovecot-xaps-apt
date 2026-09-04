@@ -1,0 +1,80 @@
+name: Reconcile APT Repository
+
+# Backstop that keeps the APT repository in sync with the latest published
+# releases of the source repositories. It runs on a schedule (and manually) and
+# triggers the Publish APT Repository workflow whenever a newer release is
+# detected than what is currently published. repository_dispatch from the
+# source release workflows is the primary path; this covers missed dispatches.
+# yamllint disable-line rule:truthy
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Find newer releases and trigger publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          published_versions() {
+            local pkg="$1"
+            curl -fsSL \
+              "https://timlaing.github.io/dovecot-xaps-apt/dists/stable/main/binary-amd64/Packages" \
+              | awk -v pkg="$pkg" '
+                  $1 == "Package:" && $2 == pkg { want=1 }
+                  want && $1 == "Version:" {
+                    print $2
+                    want=0
+                  }
+                '
+          }
+
+          # repo -> (publish input name, binary package name)
+          declare -A input=( [dovecot-xaps-plugin]=plugin_ref [dovecot-xaps-daemon]=daemon_ref )
+          declare -A pkg=( [dovecot-xaps-plugin]=dovecot-xaps-plugin [dovecot-xaps-daemon]=xapsd )
+
+          triggered=0
+          for repo in dovecot-xaps-plugin dovecot-xaps-daemon; do
+            latest="$(gh release view --repo "timlaing/${repo}" --json tagName --jq .tagName 2>/dev/null || true)"
+            if [ -z "${latest}" ]; then
+              echo "${repo}: no published release; skipping"
+              continue
+            fi
+            version="${latest#v}"
+            already=false
+            for published in $(published_versions "${pkg[$repo]}"); do
+              # Debian versions may carry a revision (e.g. 1.0.2-1); compare
+              # the upstream portion so a matching tag is treated as present.
+              up="${published%%-*}"
+              if [ "${up}" = "${version}" ]; then
+                already=true
+                break
+              fi
+            done
+            echo "${repo}: latest=${latest} (${version}), published=$([ "$already" = true ] && echo yes || echo NO)"
+            if [ "$already" = false ]; then
+              gh workflow run "Publish APT Repository" \
+                --repo timlaing/dovecot-xaps-apt \
+                -f "${input[$repo]}=${latest}"
+              echo "Dispatched publish with ${input[$repo]}=${latest}"
+              triggered=$((triggered + 1))
+            fi
+          done
+
+          if [ "$triggered" -eq 0 ]; then
+            echo "No newer releases found; repository is up to date."
+          fi
