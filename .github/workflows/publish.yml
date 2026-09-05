@@ -19,7 +19,11 @@ on:
     types: [apt-release]
 
 concurrency:
-  group: publish-${{ github.ref }}
+  # This workflow always publishes state to main, so key the group by the
+  # branch being mutated (main) rather than the ref the run was triggered on.
+  # A dispatch from a non-main ref would otherwise get a different group and
+  # could overlap a main publish. The job is gated to refs/heads/main below.
+  group: publish-main
   # Queue instead of cancelling so a run never aborts mid-push of the APT
   # state and leaves the repository half updated. Runs are short and rare.
   cancel-in-progress: false
@@ -31,6 +35,9 @@ permissions:
 
 jobs:
   publish:
+    # Only ever mutate the released state from main; a workflow_dispatch on a
+    # feature branch is a no-op (repository_dispatch always targets main).
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -135,12 +142,11 @@ jobs:
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           set -euo pipefail
+          # conf/distributions declares amd64 and arm64, so a successful export
+          # must produce both indexes, each carrying the full published set.
+          # Failing here catches dropped/empty indexes, not just missing rows.
           for arch in amd64 arm64; do
             index="dists/stable/main/binary-${arch}/Packages"
-            if [ ! -s "${index}" ]; then
-              echo "${arch} index is empty/absent; skipping arch assertion."
-              continue
-            fi
             for pkg in xapsd dovecot-xaps-plugin; do
               if ! grep -q "^Package: ${pkg}$" "${index}"; then
                 echo "Missing ${pkg} in ${index}"
