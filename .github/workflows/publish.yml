@@ -177,6 +177,15 @@ jobs:
           fi
           echo "No private key material in APT state."
 
+      - name: Verify InRelease signature
+        # Verify the freshly exported, signed InRelease against the published
+        # public key before any of the state is committed/pushed. Signing
+        # misconfiguration must abort the run before main is mutated.
+        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        run: |
+          gpg -o /tmp/apt-keyring.gpg --dearmor public-key.asc
+          gpgv --keyring /tmp/apt-keyring.gpg dists/stable/InRelease
+
       - name: Commit and push APT state
         # Persist db/dists/pool so the next run merges instead of rebuilding a
         # snapshot from scratch. Without this the deployed index only contains
@@ -204,13 +213,6 @@ jobs:
           mkdir -p /tmp/pages
           cp -r dists pool conf public-key.asc /tmp/pages/
           touch /tmp/pages/.nojekyll
-
-      - name: Verify InRelease signature
-        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
-        run: |
-          gpg -o /tmp/apt-keyring.gpg --dearmor public-key.asc
-          gpgv --keyring /tmp/apt-keyring.gpg \
-            /tmp/pages/dists/stable/InRelease
 
       - name: Ensure no private keys in artifact
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
