@@ -49,10 +49,11 @@ jobs:
           persist-credentials: false
 
       - name: Sync to latest main
-        # Merge into the last committed APT state. Runs are serialized by the
-        # concurrency group, so syncing before importing/exporting guarantees
-        # the generated state is based on the newest db/dists/pool and pushes
-        # fast-forward cleanly. Do not rebase again after reprepro writes state.
+        # Reset local state to the last committed APT state on origin/main.
+        # Runs are serialized by the concurrency group, so syncing before
+        # importing/exporting guarantees the generated snapshot is based on
+        # the newest db/dists/pool and pushes fast-forward cleanly. Do not
+        # rebase or reset again after reprepro writes state.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
