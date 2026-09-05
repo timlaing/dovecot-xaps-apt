@@ -20,10 +20,12 @@ on:
 
 concurrency:
   group: publish-${{ github.ref }}
-  cancel-in-progress: true
+  # Queue instead of cancelling so a run never aborts mid-push of the APT
+  # state and leaves the repository half updated. Runs are short and rare.
+  cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -109,6 +111,47 @@ jobs:
             reprepro --basedir . export
           else
             echo "No packages to import; skipping."
+          fi
+
+      - name: Assert published set
+        # Regression guard: db/dists/pool are committed state, so an import of
+        # only one producer must never remove the other from the snapshot. Both
+        # binary packages must be present in every arch index after export.
+        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        run: |
+          set -euo pipefail
+          for arch in amd64 arm64; do
+            index="dists/stable/main/binary-${arch}/Packages"
+            for pkg in xapsd dovecot-xaps-plugin; do
+              if ! grep -q "^Package: ${pkg}$" "${index}"; then
+                echo "Missing ${pkg} in ${index}"
+                exit 1
+              fi
+            done
+          done
+          echo "Published set is complete."
+
+      - name: Commit and push APT state
+        # Persist db/dists/pool so the next run merges instead of rebuilding a
+        # snapshot from scratch. Without this the deployed index only contains
+        # the packages imported by the most recent dispatch.
+        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add db dists pool public-key.asc
+          if git diff --cached --quiet; then
+            echo "No APT state changes to commit."
+          else
+            git commit -m "chore: update APT repository state [skip ci]"
+            git remote set-url origin \
+              "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git pull --rebase origin main
+            git push origin HEAD:main
+            echo "APT state committed and pushed."
           fi
 
       - name: Stage Pages artifact
