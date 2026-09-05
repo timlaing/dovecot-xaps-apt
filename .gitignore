@@ -84,10 +84,6 @@ devcontainer-lock.json
 .mypy_cache
 node_modules
 
-# APT repository generated state
+# APT repository secrets only
 private-key.asc
 fingerprint
-/db/
-/dists/
-/pool/
-/repo/
