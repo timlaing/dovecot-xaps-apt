@@ -57,10 +57,13 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       - name: Trust github.com host key
+        # Pin github.com's published SSH host key (from api.github.com/meta)
+        # instead of TOFU via ssh-keyscan, so the push can't be redirected to
+        # a MITM host.
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
 
       - name: Sync to latest main
         # Reset local state to the last committed APT state on origin/main.
