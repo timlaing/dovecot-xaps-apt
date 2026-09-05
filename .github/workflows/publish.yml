@@ -52,7 +52,8 @@ jobs:
         # The repo's main ruleset lists Deploy keys as bypass actors but not
         # the GitHub Actions app, so pushing over HTTPS with GITHUB_TOKEN is
         # rejected. State commits must be authenticated as the deploy key.
-        uses: webfactory/ssh-agent@v0.9.0
+        # Pinned to the immutable SHA of webfactory/ssh-agent v0.9.0.
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
