@@ -60,8 +60,9 @@ jobs:
           git remote set-url origin \
             "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch origin
-          git checkout main
-          git reset --hard origin/main
+          # checkout may leave a detached HEAD; -B (re)creates the local branch
+          # from origin/main deterministically, and also resets any drift.
+          git checkout -B main origin/main
 
       - name: Install tooling
         run: |
@@ -142,11 +143,16 @@ jobs:
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           set -euo pipefail
-          # conf/distributions declares amd64 and arm64, so a successful export
-          # must produce both indexes, each carrying the full published set.
-          # Failing here catches dropped/empty indexes, not just missing rows.
+          # amd64 is authoritative today; the source repos only publish amd64
+          # debs. Enforce the full set on amd64 unconditionally, and enforce it
+          # on additional declared arches only when their index exists and
+          # carries packages (as reconcile.yml already tolerates).
           for arch in amd64 arm64; do
             index="dists/stable/main/binary-${arch}/Packages"
+            if [ "${arch}" != "amd64" ] && [ ! -s "${index}" ]; then
+              echo "${arch} index is empty/absent; skipping arch assertion."
+              continue
+            fi
             for pkg in xapsd dovecot-xaps-plugin; do
               if ! grep -q "^Package: ${pkg}$" "${index}"; then
                 echo "Missing ${pkg} in ${index}"
