@@ -34,7 +34,7 @@ jobs:
             local pkg="$1"
             for arch in amd64 arm64; do
               curl -fsSL \
-                "https://timlaing.github.io/dovecot-xaps-apt/dists/stable/main/binary-${arch}/Packages" \
+                "https://timlaing.github.io/dovecot-xaps-apt/dists/resolute/main/binary-${arch}/Packages" \
                 || continue
             done | awk -v pkg="$pkg" '
                 $1 == "Package:" && $2 == pkg { want=1 }
