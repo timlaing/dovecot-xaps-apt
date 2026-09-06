@@ -5,44 +5,44 @@ Origin: dovecot-xaps
 Label: dovecot-xaps
 Suite: stable-dov23
 Codename: stable-dov23
-Date: Sun, 06 Sep 2026 13:18:45 UTC
+Date: Sun, 06 Sep 2026 13:26:26 UTC
 Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps (Dovecot 2.3)
 MD5Sum:
- d41d8cd98f00b204e9800998ecf8427e 0 main/binary-amd64/Packages
- 7029066c27ac6f5ef18d660d5741979a 20 main/binary-amd64/Packages.gz
+ 99271bb391af5c5ea5c0f74fab135fef 743 main/binary-amd64/Packages
+ 5ce18b73666f19114e13d3f13b2180a4 494 main/binary-amd64/Packages.gz
  9b8b11861de0a20a520642ba317af211 159 main/binary-amd64/Release
- d41d8cd98f00b204e9800998ecf8427e 0 main/binary-arm64/Packages
- 7029066c27ac6f5ef18d660d5741979a 20 main/binary-arm64/Packages.gz
+ fde953ec85b267fc00dde7e3c65b1790 744 main/binary-arm64/Packages
+ 7382b37c831a5b175f274329ccba5295 492 main/binary-arm64/Packages.gz
  31e6bcabda7f8089bf1b8108bb21c4ae 159 main/binary-arm64/Release
 SHA1:
- da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-amd64/Packages
- 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-amd64/Packages.gz
+ b5f8c37ec553619a3f10ee62abca60cf852bfdb8 743 main/binary-amd64/Packages
+ 987adb4e6042a484d9c9cacd830cd39b445b6560 494 main/binary-amd64/Packages.gz
  e465fbb2dc41e11507ff5b58b5566e3b8571fff5 159 main/binary-amd64/Release
- da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-arm64/Packages
- 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-arm64/Packages.gz
+ f8cf986cb8d448b2a3f97eb14dd19f68f964f96c 744 main/binary-arm64/Packages
+ cd58fa23800560c7378594c223e912379048d149 492 main/binary-arm64/Packages.gz
  aef0f7051eac02a265489f44fb2606b85b2001c4 159 main/binary-arm64/Release
 SHA256:
- e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-amd64/Packages
- 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-amd64/Packages.gz
+ bae65bbf9bd38132c867357ba5d7c6fc46213362a0f36c90fb866014502e37c8 743 main/binary-amd64/Packages
+ d59d1df0b7935977f59728b0e5e7adeaca493cb2e89ed8f52c649b01ff7d5b25 494 main/binary-amd64/Packages.gz
  818a5cd7dba025d5f717054c8ecf0ed5ab6b6cf67cdba9643fd740b0288265d7 159 main/binary-amd64/Release
- e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-arm64/Packages
- 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-arm64/Packages.gz
+ 3c807697cecac82671f7ff199c2bf63389c76f680453e4329f5e10c4c4c92b5c 744 main/binary-arm64/Packages
+ 08d265f98add21af32d042075f84964c16921a83cdeaf0bd9f5384fcdeb418f9 492 main/binary-arm64/Packages.gz
  5724b1a15053dcb0491de5fdb26a3eeecb2e87f572e551c485f8fe68ac91aeaf 159 main/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE1vR2QqVCTHgzLM2O6tJ2b06FdpMFAmqdaDUACgkQ6tJ2b06F
-dpMq3g//YTvskmsIobVDpoQWOefN1zdt75Cupd7z3ZfeQPBb6F/5LNO2YYXHWosJ
-1m5lj79h9awb7KMEhY4mPANL+geOn+LgCULDpeDlMJvOLhivLzurjPb3uxCAyLnL
-PMWDnRgNRf5wyPCJUcWb0DY7aX5TLJwfOdEOSnu7HoA/khouu0Q89AMieGJ6y6ay
-Cqs0zNkDvzaaWI7NL9cZTTaBSLZ2fPj0A2PFuyrhPDzaDDeR7Qmg8syoyw/Q4zrh
-wUyr5oS9Yh63lBG/ERD0aBaL0IaMEX9vxx/KiReL4c3m2eeRzYRryqF3TuhyD+xe
-vnJBT/4Wi1V4hl52NN/kh+ooee9zuOo+HNGe8EE00KiMCUYWlQP0YmfLJKK5hvZ/
-isVYmZitr9OmyWNnoDLEjSyDMVzC0o5ibVbl1PT/LB1rY1lQHcYuBsFH/1FkBcG1
-/oshvenD8jA74hFB2FbHH6/31mwsFEwwxYUUb6rCMWZpmaGO32NYF7t0KZ+8G8Pu
-m7YergCp0AP5z7x+V2Lgu7lBTEPSxWMUu3zO1fYN7Tt3ka0C4/v7u2+XJpb6E/83
-5Mv1o4ofFFUnuAcPJYlf/TAI6oKgKbSOV0wy+OBNjIN52C4aY+nJlk69lnZ6Vl4n
-6J6fmMj+bGy9K6Y++R5+kgaB1X/AkQtQWLifbVTgj3Xtrzzj84E=
-=dVPj
+iQIzBAEBCgAdFiEE1vR2QqVCTHgzLM2O6tJ2b06FdpMFAmqdagIACgkQ6tJ2b06F
+dpOfNxAAtifiWu2TwQYfujPzQ7cOFPXw7vWh9HMTmzKomtnV6jknKauhadUHT14q
+3rLEgXQv4yXN/1Fy+DNuOZwQ5H3d7A05sZOW/H2hVjStBR19I4hrwZO4C4J0Tghg
+GIP+LzFfbM+wCQj49XM0rpm94txtjFT7qKLChCIRi/699T2Ao3/xvAkWtDi/Wpbf
+RYl965eKyKEXUrnPaeggCEP2Y4iJrRBTnQj081TeyGBg3QbhPPNfHcG2W1iCWjk2
++eJOJStvRX9haZxYsCg3aqaWdY3AP90g3q1kdHNLFCuS0+nxQkaQfvSzASzTlzyf
+hMw2IDEHPK+l8I3IiY80eoAb/xpW75t7pKCKahSiIjHWxFUnHIZupnVnWLLguZAQ
+ZXLXzAdQ9M99IL4MiZFVehU9BZbd5/ZsgsCWD+2ZsB2bbjbGTAEOrvdSWVazowY/
+uzpEQxWa2HYCknEeZYDPeO5PCowO5RyEck4tOPXGTCb70iKKrTyT0d7S9pl4CRp8
+7ze9uwM9pP8tOO4bhMPj79USXA5sgIGpa/k5oxQxxZDS18fgHgp+j5divBqIbWog
+55a+5O31cPlHnczbykkXK5GwEVD7NBi8hl9QYnVuo/q2AuQVxiUMBkbj1IW8Kl8Z
+q4oSib7kmmzO7XghbCfJx1XUFt8eEvwVrI1f4JEFphcoozOwxHE=
+=ocTT
 -----END PGP SIGNATURE-----
