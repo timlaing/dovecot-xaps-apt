@@ -1,0 +1,6 @@
+Archive: stable-dov23
+Component: main
+Origin: dovecot-xaps
+Label: dovecot-xaps
+Architecture: arm64
+Description: Debian packages for dovecot-xaps (Dovecot 2.3)
