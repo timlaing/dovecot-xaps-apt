@@ -142,10 +142,27 @@ jobs:
         run: |
           set -euo pipefail
           if ls /tmp/pkgs/*.deb >/dev/null 2>&1; then
+            # The Dovecot 2.3 plugin build sorts below the 2.4 build under
+            # dpkg version ordering (1.0.4-1~dov23 < 1.0.4-1), so importing
+            # both into one suite would make reprepro supersede and delete
+            # the ~dov23 one. Route them into separate suites instead, chosen
+            # by the client's sources line.
+            mkdir -p /tmp/pkgs-dov23
             for deb in /tmp/pkgs/*.deb; do
-              echo "Importing ${deb}"
+              case "$(basename "$deb")" in
+                *~dov23_*.deb) mv "$deb" /tmp/pkgs-dov23/ ;;
+              esac
+            done
+            for deb in /tmp/pkgs/*.deb; do
+              echo "Importing ${deb} into stable"
               reprepro --basedir . includedeb stable "${deb}"
             done
+            if ls /tmp/pkgs-dov23/*.deb >/dev/null 2>&1; then
+              for deb in /tmp/pkgs-dov23/*.deb; do
+                echo "Importing ${deb} into stable-dov23"
+                reprepro --basedir . includedeb stable-dov23 "${deb}"
+              done
+            fi
             reprepro --basedir . check
             reprepro --basedir . export
           else
@@ -155,32 +172,36 @@ jobs:
       - name: Assert published set
         # Regression guard: db/dists/pool are committed state, so an import of
         # only one producer must never remove the other from the snapshot. The
-        # full set is enforced on amd64 always, and on other declared arches
-        # only when their index exists and is non-empty.
+        # full set is enforced on any populated binary-<arch> index of each
+        # declared suite; empty or absent indexes (e.g. stable-dov23 before its
+        # first import) are skipped.
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           set -euo pipefail
           # Derive declared architectures from conf/distributions (the source of
           # truth) so the guard tracks config changes instead of drifting from a
-          # hard-coded list. Drop the optional "source" token.
-          arches="$(awk '/^Architectures:/{for (i=2; i<=NF; i++) if ($i != "source") printf "%s ", $i}' conf/distributions)"
-          # amd64 is authoritative today; the source repos only publish amd64
-          # debs. Enforce the full set on amd64 unconditionally, and enforce it
-          # on additional declared arches only when their index exists and
-          # carries packages (as reconcile.yml already tolerates).
-          for arch in ${arches}; do
-            index="dists/stable/main/binary-${arch}/Packages"
-            if [ "${arch}" != "amd64" ] && [ ! -s "${index}" ]; then
-              echo "${arch} index is empty/absent; skipping arch assertion."
-              continue
-            fi
-            for pkg in xapsd dovecot-xaps-plugin; do
-              if ! grep -q "^Package: ${pkg}$" "${index}"; then
-                echo "Missing ${pkg} in ${index}"
-                exit 1
-              fi
+          # hard-coded list. Drop the optional "source" token and dedupe, since
+          # every suite lists the same architectures.
+          arches="$(awk '/^Architectures:/{for (i=2; i<=NF; i++) if ($i != "source") printf "%s ", $i}' conf/distributions | tr ' ' '\n' | sort -u | tr '\n' ' ')"
+          check_suite() {
+            local dist="$1"; shift
+            local missing=0
+            for arch in ${arches}; do
+              local index="dists/${dist}/main/binary-${arch}/Packages"
+              [ -s "${index}" ] || continue
+              for pkg in "$@"; do
+                if ! grep -q "^Package: ${pkg}$" "${index}"; then
+                  echo "Missing ${pkg} in ${dist}/binary-${arch}"
+                  missing=1
+                fi
+              done
             done
-          done
+            return ${missing}
+          }
+          # stable carries the daemon and the Dovecot 2.4 plugin; the
+          # stable-dov23 suite carries only the Dovecot 2.3 plugin build.
+          check_suite stable xapsd dovecot-xaps-plugin
+          check_suite stable-dov23 dovecot-xaps-plugin
           echo "Published set is complete."
 
       - name: Ensure no private keys in APT state

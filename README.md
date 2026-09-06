@@ -16,17 +16,30 @@ See [`CHANGELOG.md`](CHANGELOG.md) for a history of changes.
 
 ## Client Installation
 
-Add the signing key and repository:
+Add the signing key and repository. Choose the suite that matches your Dovecot major:
+
+| Dovecot version | Example OS           | Suite          |
+| --------------- | -------------------- | -------------- |
+| 2.4             | Ubuntu 26.04         | `stable`       |
+| 2.3             | Ubuntu 24.04         | `stable-dov23` |
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/timlaing/dovecot-xaps-apt/main/public-key.asc \
   | sudo gpg --dearmor --yes -o /usr/share/keyrings/dovecot-xaps-archive-keyring.gpg
 
+# Dovecot 2.4 (Ubuntu 26.04 and newer)
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt stable main" \
   | sudo tee /etc/apt/sources.list.d/dovecot-xaps.list
 
+# Dovecot 2.3 (Ubuntu 24.04): use stable-dov23 instead
+# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt stable-dov23 main" \
+#   | sudo tee /etc/apt/sources.list.d/dovecot-xaps.list
+
 sudo apt update && sudo apt install dovecot-xaps-plugin xapsd
 ```
+
+The `stable` suite holds the daemon plus the Dovecot 2.4 plugin; `stable-dov23` holds only the Dovecot 2.3 plugin build,
+whose package version sorts below the 2.4 build so the two cannot collide within a single suite.
 
 ## Signing Key
 
