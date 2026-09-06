@@ -2,28 +2,28 @@ Origin: dovecot-xaps
 Label: dovecot-xaps
 Suite: stable-dov23
 Codename: stable-dov23
-Date: Sun, 06 Sep 2026 13:26:26 UTC
+Date: Sun, 06 Sep 2026 13:37:21 UTC
 Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps (Dovecot 2.3)
 MD5Sum:
- 99271bb391af5c5ea5c0f74fab135fef 743 main/binary-amd64/Packages
- 5ce18b73666f19114e13d3f13b2180a4 494 main/binary-amd64/Packages.gz
+ ee4a6d52a5e1edf00a7907d845345c97 1538 main/binary-amd64/Packages
+ fd2e046fcb4f83b25b42567a7e39873f 775 main/binary-amd64/Packages.gz
  9b8b11861de0a20a520642ba317af211 159 main/binary-amd64/Release
- fde953ec85b267fc00dde7e3c65b1790 744 main/binary-arm64/Packages
- 7382b37c831a5b175f274329ccba5295 492 main/binary-arm64/Packages.gz
+ 14565f96b633f46421b4fe3e5670db84 1522 main/binary-arm64/Packages
+ 975e32f5eb1949a3bcd2b28b32aba5e3 771 main/binary-arm64/Packages.gz
  31e6bcabda7f8089bf1b8108bb21c4ae 159 main/binary-arm64/Release
 SHA1:
- b5f8c37ec553619a3f10ee62abca60cf852bfdb8 743 main/binary-amd64/Packages
- 987adb4e6042a484d9c9cacd830cd39b445b6560 494 main/binary-amd64/Packages.gz
+ c880fcff51916bf37ab0bc73fa288468f89d8f86 1538 main/binary-amd64/Packages
+ 0604e0a797a0111054d00aa213d5dba2a9748e74 775 main/binary-amd64/Packages.gz
  e465fbb2dc41e11507ff5b58b5566e3b8571fff5 159 main/binary-amd64/Release
- f8cf986cb8d448b2a3f97eb14dd19f68f964f96c 744 main/binary-arm64/Packages
- cd58fa23800560c7378594c223e912379048d149 492 main/binary-arm64/Packages.gz
+ c0329be5621d169f93ce0ca4d1786e35797556f9 1522 main/binary-arm64/Packages
+ 1f4abbb4e9f14b5523d99ed4014bbd0281ff2dc2 771 main/binary-arm64/Packages.gz
  aef0f7051eac02a265489f44fb2606b85b2001c4 159 main/binary-arm64/Release
 SHA256:
- bae65bbf9bd38132c867357ba5d7c6fc46213362a0f36c90fb866014502e37c8 743 main/binary-amd64/Packages
- d59d1df0b7935977f59728b0e5e7adeaca493cb2e89ed8f52c649b01ff7d5b25 494 main/binary-amd64/Packages.gz
+ cb4bfdc999b93fe857a8d999e923c09ca4fcf76095e065d09f52a725ba3c9efe 1538 main/binary-amd64/Packages
+ 04ba18ff99af2a2eb02d80aefd3fdaa5797f0c8b16c02c06227fbe3a85b01a39 775 main/binary-amd64/Packages.gz
  818a5cd7dba025d5f717054c8ecf0ed5ab6b6cf67cdba9643fd740b0288265d7 159 main/binary-amd64/Release
- 3c807697cecac82671f7ff199c2bf63389c76f680453e4329f5e10c4c4c92b5c 744 main/binary-arm64/Packages
- 08d265f98add21af32d042075f84964c16921a83cdeaf0bd9f5384fcdeb418f9 492 main/binary-arm64/Packages.gz
+ 447422a2bfd11bcea525b5f4caeaeb62485f4654593f148458b70f8d1a44b435 1522 main/binary-arm64/Packages
+ a9750a660f7d48d29564f752d8d3cc8e094a69f36370ff631955cfa861e29c38 771 main/binary-arm64/Packages.gz
  5724b1a15053dcb0491de5fdb26a3eeecb2e87f572e551c485f8fe68ac91aeaf 159 main/binary-arm64/Release

@@ -2,7 +2,7 @@ Origin: dovecot-xaps
 Label: dovecot-xaps
 Suite: stable
 Codename: stable
-Date: Sun, 06 Sep 2026 13:26:26 UTC
+Date: Sun, 06 Sep 2026 13:37:21 UTC
 Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps
