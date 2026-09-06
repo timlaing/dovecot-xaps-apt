@@ -1,0 +1,29 @@
+Origin: dovecot-xaps
+Label: dovecot-xaps
+Suite: resolute
+Codename: resolute
+Date: Sun, 06 Sep 2026 13:54:43 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Debian packages for dovecot-xaps
+MD5Sum:
+ c6c05fe0f378266ae13d9350b9028f58 1527 main/binary-amd64/Packages
+ 80787fcbab59449a1bdbc1dc307eec42 773 main/binary-amd64/Packages.gz
+ 6d398a0f0682efb929c1e3fe5ba65bce 141 main/binary-amd64/Release
+ b514b04299418860c04075740424f3f7 1510 main/binary-arm64/Packages
+ 123b1b24b2c829f0fa4c4fa119d66448 769 main/binary-arm64/Packages.gz
+ 9b1aad6ae05615ddc078aa3ee1ad9427 141 main/binary-arm64/Release
+SHA1:
+ 20df7a69de8221afcbb2379516ef872b31c7256e 1527 main/binary-amd64/Packages
+ 5de24e771a93c7edbdb731bbac9f23594c686976 773 main/binary-amd64/Packages.gz
+ b3930a359d3addf2b3f995f3c3699b3c8429a793 141 main/binary-amd64/Release
+ 3f1bc55e661580424f7653f9360a643df56b9f96 1510 main/binary-arm64/Packages
+ f227673eec2c035ed849bd84095484b3198534e7 769 main/binary-arm64/Packages.gz
+ 8abb69017b1beecf88612510c253b538b11b6de9 141 main/binary-arm64/Release
+SHA256:
+ b0297ae59feca5beddaaf95ad7913582463e4ad921f86bef33384c5c71fd17fe 1527 main/binary-amd64/Packages
+ 7c67392fa39b94576076018d4e1f2d4521fcea1da6a26fc872b2dc2517c2b11c 773 main/binary-amd64/Packages.gz
+ 8510ed448232717b06d81f121779716c542cd398875cd9a9aa9a18c0ec8b29fe 141 main/binary-amd64/Release
+ 9ba26ac084019b49f6fc4a59f1fc5f6c90639f9665746f906a7a3ef0f999530c 1510 main/binary-arm64/Packages
+ b45566901974aedb5c456b34b50265602edf036e93088df929f37706db64bf69 769 main/binary-arm64/Packages.gz
+ 56d4a4b7a51eb4ed315118dd9cea6259b5d716f8e42239adcd9f1bc217545446 141 main/binary-arm64/Release

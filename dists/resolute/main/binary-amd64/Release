@@ -1,0 +1,6 @@
+Archive: resolute
+Component: main
+Origin: dovecot-xaps
+Label: dovecot-xaps
+Architecture: amd64
+Description: Debian packages for dovecot-xaps

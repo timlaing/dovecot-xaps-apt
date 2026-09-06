@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: dovecot-xaps
+Label: dovecot-xaps
+Suite: noble
+Codename: noble
+Date: Sun, 06 Sep 2026 13:54:43 UTC
+Architectures: amd64 arm64
+Components: main
+Description: Debian packages for dovecot-xaps (Dovecot 2.3)
+MD5Sum:
+ ee4a6d52a5e1edf00a7907d845345c97 1538 main/binary-amd64/Packages
+ fd2e046fcb4f83b25b42567a7e39873f 775 main/binary-amd64/Packages.gz
+ 371d7da99c8412f9aa60cb48943a6505 152 main/binary-amd64/Release
+ 14565f96b633f46421b4fe3e5670db84 1522 main/binary-arm64/Packages
+ 975e32f5eb1949a3bcd2b28b32aba5e3 771 main/binary-arm64/Packages.gz
+ d688eb7db7af3d7d2663623f9b77d789 152 main/binary-arm64/Release
+SHA1:
+ c880fcff51916bf37ab0bc73fa288468f89d8f86 1538 main/binary-amd64/Packages
+ 0604e0a797a0111054d00aa213d5dba2a9748e74 775 main/binary-amd64/Packages.gz
+ 6b17dce017beae4ec6e7b1fcc97f8aa5af9f6d9d 152 main/binary-amd64/Release
+ c0329be5621d169f93ce0ca4d1786e35797556f9 1522 main/binary-arm64/Packages
+ 1f4abbb4e9f14b5523d99ed4014bbd0281ff2dc2 771 main/binary-arm64/Packages.gz
+ 6f0a732baa5c9147e233bceeb89661670e894099 152 main/binary-arm64/Release
+SHA256:
+ cb4bfdc999b93fe857a8d999e923c09ca4fcf76095e065d09f52a725ba3c9efe 1538 main/binary-amd64/Packages
+ 04ba18ff99af2a2eb02d80aefd3fdaa5797f0c8b16c02c06227fbe3a85b01a39 775 main/binary-amd64/Packages.gz
+ 192ecff6b030d2b40c017b5a4c91d29a2c5defc96110e43fb82c88feba01e95a 152 main/binary-amd64/Release
+ 447422a2bfd11bcea525b5f4caeaeb62485f4654593f148458b70f8d1a44b435 1522 main/binary-arm64/Packages
+ a9750a660f7d48d29564f752d8d3cc8e094a69f36370ff631955cfa861e29c38 771 main/binary-arm64/Packages.gz
+ 104efbb82a9419e11b55cbc10072878b6cf7f30e00af2acce6ed4738d1595229 152 main/binary-arm64/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE1vR2QqVCTHgzLM2O6tJ2b06FdpMFAmqdcKMACgkQ6tJ2b06F
+dpPlbBAAvDrBUtoRUSk+imdHPSe3hb76bOI+CWsrGbf1i4LXGcUsCrwVLHCTJ0kl
++++qFTB6loqIBkCyoxaEpDlD7rFIM7Y6D4aZvbCZ/0TsFAIAfPhWtES0pXOzK7/3
+mWO+tMyxD+t++a5sYWIeQJ/LijjTtA5TpBxBbSDCB4qsEm1umOALdjyGq+M8pK5h
+r4m4/xSjMuNOBiS18rF1hYGZYuYCZo4vvct6vw9Ixxg2DOUx9HMbjvzTHublaFMA
+GrHZQn6fzt8KYnezjjhmQ1mH3khP0YmTi4O+tInBnqjC+C78m5XXNPbg3F0AbLgi
+ei+cQys769qGw6n2n0vXw+j7TnDF9+U9sUrVJDbq0IY1utG7RsPsIj2PzvpTpWWg
+cyl+t+WiRiGpLUPZux7/F3nX9Hy/z/OU1tarIccWURx46i4+kcxK7jrSpf6MbPNt
+PlM5xPbxbqCx+hEpmN0sWbkl6A7pa4X90CU10Te2qLNg/vaect8JFCbLEme9V8om
+SCM6HaSSRPy8TFn2xb4+hBRHGrvWUBK8SD7SPpAKTVDeeN4+jAjFZf1brobeb1PR
+f9L3/mdTop/0Hdtnk0VzQ53UgZ7qqe1N3qo9nVgNh37IoZHiK+YIYbnIPuVL5LPr
+AnMTePEINDHK12DBliLkv8p0yswGqMcHlX6ul3bkfSSkBhW1ZS0=
+=8I27
+-----END PGP SIGNATURE-----
