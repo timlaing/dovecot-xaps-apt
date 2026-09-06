@@ -38,8 +38,7 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring
 sudo apt update && sudo apt install dovecot-xaps-plugin xapsd
 ```
 
-The `stable` suite holds the daemon plus the Dovecot 2.4 plugin; `stable-dov23` holds only the Dovecot 2.3 plugin build,
-whose package version sorts below the 2.4 build so the two cannot collide within a single suite.
+Each suite is self-contained: it holds the matching Dovecot plugin build plus the daemon. The `stable-dov23` plugin version sorts below the 2.4 build, so the two cannot collide within a single suite.
 
 ## Signing Key
 
