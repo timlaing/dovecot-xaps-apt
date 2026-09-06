@@ -149,9 +149,14 @@ jobs:
             # by the client's sources line.
             mkdir -p /tmp/pkgs-dov23
             for deb in /tmp/pkgs/*.deb; do
-              case "$(basename "$deb")" in
-                *~dov23_*.deb) mv "$deb" /tmp/pkgs-dov23/ ;;
-              esac
+              # Classify by the package Version field rather than the filename:
+              # cpack's DEB-DEFAULT naming rewrites the tilde in 1.0.4-1~dov23
+              # to a dot (…-1.dov23_amd64.deb), so a filename glob misses the
+              # Dovecot 2.3 builds and they would be superseded/deleted by the
+              # 2.4 build (1.0.4-1~dov23 sorts below 1.0.4-1) in the same suite.
+              if dpkg-deb --field "$deb" Version | grep -q '~dov23$'; then
+                mv "$deb" /tmp/pkgs-dov23/
+              fi
             done
             for deb in /tmp/pkgs/*.deb; do
               echo "Importing ${deb} into stable"
