@@ -142,20 +142,24 @@ jobs:
         run: |
           set -euo pipefail
           if ls /tmp/pkgs/*.deb >/dev/null 2>&1; then
-            # The Dovecot 2.3 plugin build sorts below the 2.4 build under
-            # dpkg version ordering (1.0.4-1~dov23 < 1.0.4-1), so importing
-            # both into one suite would make reprepro supersede and delete
-            # the ~dov23 one. Route them into separate suites instead, chosen
-            # by the client's sources line.
-            mkdir -p /tmp/pkgs-dov23
+            # Each suite is self-contained: the Dovecot 2.3 plugin build sorts
+            # below the 2.4 build under dpkg ordering (1.1.0-1~dov23 <
+            # 1.1.0-1), so importing both into one suite would make reprepro
+            # supersede and delete the ~dov23 one. The daemon is therefore
+            # published into both suites, and the plugin builds are routed by
+            # their Dovecot major into the matching suite, chosen by the
+            # client's sources line.
+            mkdir -p /tmp/pkgs-dov23 /tmp/pkgs-daemon
             for deb in /tmp/pkgs/*.deb; do
-              # Classify by the package Version field rather than the filename:
-              # cpack's DEB-DEFAULT naming rewrites the tilde in 1.0.4-1~dov23
-              # to a dot (…-1.dov23_amd64.deb), so a filename glob misses the
-              # Dovecot 2.3 builds and they would be superseded/deleted by the
-              # 2.4 build (1.0.4-1~dov23 sorts below 1.0.4-1) in the same suite.
-              if dpkg-deb --field "$deb" Version | grep -q '~dov23$'; then
+              # Classify by control fields rather than filename: cpack's
+              # DEB-DEFAULT naming rewrites the tilde in 1.0.4-1~dov23 to a
+              # dot (…-1.dov23_amd64.deb), so a filename glob would miss the
+              # Dovecot 2.3 builds and lose them to supersede.
+              if dpkg-deb --field "$deb" Package | grep -q '^dovecot-xaps-plugin$' \
+                 && dpkg-deb --field "$deb" Version | grep -q '~dov23$'; then
                 mv "$deb" /tmp/pkgs-dov23/
+              elif dpkg-deb --field "$deb" Package | grep -q '^xapsd$'; then
+                mv "$deb" /tmp/pkgs-daemon/
               fi
             done
             for deb in /tmp/pkgs/*.deb; do
@@ -165,6 +169,13 @@ jobs:
             if ls /tmp/pkgs-dov23/*.deb >/dev/null 2>&1; then
               for deb in /tmp/pkgs-dov23/*.deb; do
                 echo "Importing ${deb} into stable-dov23"
+                reprepro --basedir . includedeb stable-dov23 "${deb}"
+              done
+            fi
+            if ls /tmp/pkgs-daemon/*.deb >/dev/null 2>&1; then
+              for deb in /tmp/pkgs-daemon/*.deb; do
+                echo "Importing ${deb} into stable and stable-dov23"
+                reprepro --basedir . includedeb stable "${deb}"
                 reprepro --basedir . includedeb stable-dov23 "${deb}"
               done
             fi
@@ -204,9 +215,9 @@ jobs:
             return ${missing}
           }
           # stable carries the daemon and the Dovecot 2.4 plugin; the
-          # stable-dov23 suite carries only the Dovecot 2.3 plugin build.
+          # stable-dov23 suite carries the daemon and the Dovecot 2.3 build.
           check_suite stable xapsd dovecot-xaps-plugin
-          check_suite stable-dov23 dovecot-xaps-plugin
+          check_suite stable-dov23 xapsd dovecot-xaps-plugin
           echo "Published set is complete."
 
       - name: Ensure no private keys in APT state
