@@ -163,20 +163,20 @@ jobs:
               fi
             done
             for deb in /tmp/pkgs/*.deb; do
-              echo "Importing ${deb} into stable"
-              reprepro --basedir . includedeb stable "${deb}"
+              echo "Importing ${deb} into resolute"
+              reprepro --basedir . includedeb resolute "${deb}"
             done
             if ls /tmp/pkgs-dov23/*.deb >/dev/null 2>&1; then
               for deb in /tmp/pkgs-dov23/*.deb; do
-                echo "Importing ${deb} into stable-dov23"
-                reprepro --basedir . includedeb stable-dov23 "${deb}"
+                echo "Importing ${deb} into noble"
+                reprepro --basedir . includedeb noble "${deb}"
               done
             fi
             if ls /tmp/pkgs-daemon/*.deb >/dev/null 2>&1; then
               for deb in /tmp/pkgs-daemon/*.deb; do
-                echo "Importing ${deb} into stable and stable-dov23"
-                reprepro --basedir . includedeb stable "${deb}"
-                reprepro --basedir . includedeb stable-dov23 "${deb}"
+                echo "Importing ${deb} into resolute and noble"
+                reprepro --basedir . includedeb resolute "${deb}"
+                reprepro --basedir . includedeb noble "${deb}"
               done
             fi
             reprepro --basedir . check
@@ -189,7 +189,7 @@ jobs:
         # Regression guard: db/dists/pool are committed state, so an import of
         # only one producer must never remove the other from the snapshot. The
         # full set is enforced on any populated binary-<arch> index of each
-        # declared suite; empty or absent indexes (e.g. stable-dov23 before its
+        # declared suite; empty or absent indexes (e.g. noble before its
         # first import) are skipped.
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
@@ -214,10 +214,10 @@ jobs:
             done
             return ${missing}
           }
-          # stable carries the daemon and the Dovecot 2.4 plugin; the
-          # stable-dov23 suite carries the daemon and the Dovecot 2.3 build.
-          check_suite stable xapsd dovecot-xaps-plugin
-          check_suite stable-dov23 xapsd dovecot-xaps-plugin
+          # resolute carries the daemon and the Dovecot 2.4 plugin; the
+          # noble suite carries the daemon and the Dovecot 2.3 build.
+          check_suite resolute xapsd dovecot-xaps-plugin
+          check_suite noble xapsd dovecot-xaps-plugin
           echo "Published set is complete."
 
       - name: Ensure no private keys in APT state
@@ -251,7 +251,7 @@ jobs:
         if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           gpg -o /tmp/apt-keyring.gpg --dearmor public-key.asc
-          gpgv --keyring /tmp/apt-keyring.gpg dists/stable/InRelease
+          gpgv --keyring /tmp/apt-keyring.gpg dists/resolute/InRelease
 
       - name: Commit and push APT state
         # Persist db/dists/pool so the next run merges instead of rebuilding a

@@ -18,27 +18,27 @@ See [`CHANGELOG.md`](CHANGELOG.md) for a history of changes.
 
 Add the signing key and repository. Choose the suite that matches your Dovecot major:
 
-| Dovecot version | Example OS           | Suite          |
-| --------------- | -------------------- | -------------- |
-| 2.4             | Ubuntu 26.04         | `stable`       |
-| 2.3             | Ubuntu 24.04         | `stable-dov23` |
+| Dovecot version | Example OS   | Suite      |
+| --------------- | ------------ | ---------- |
+| 2.4             | Ubuntu 26.04 | `resolute` |
+| 2.3             | Ubuntu 24.04 | `noble`    |
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/timlaing/dovecot-xaps-apt/main/public-key.asc \
   | sudo gpg --dearmor --yes -o /usr/share/keyrings/dovecot-xaps-archive-keyring.gpg
 
 # Dovecot 2.4 (Ubuntu 26.04 and newer)
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt stable main" \
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt resolute main" \
   | sudo tee /etc/apt/sources.list.d/dovecot-xaps.list
 
-# Dovecot 2.3 (Ubuntu 24.04): use stable-dov23 instead
-# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt stable-dov23 main" \
+# Dovecot 2.3 (Ubuntu 24.04): use noble instead
+# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/dovecot-xaps-archive-keyring.gpg] https://timlaing.github.io/dovecot-xaps-apt noble main" \
 #   | sudo tee /etc/apt/sources.list.d/dovecot-xaps.list
 
 sudo apt update && sudo apt install dovecot-xaps-plugin xapsd
 ```
 
-Each suite is self-contained: it holds the matching Dovecot plugin build plus the daemon. The `stable-dov23` plugin version sorts below the 2.4 build, so the two cannot collide within a single suite.
+Each suite is self-contained: it holds the matching Dovecot plugin build plus the daemon. The `noble` plugin version sorts below the 2.4 build, so the two cannot collide within a single suite. Suite names follow the Ubuntu release codenames (`resolute` for 26.04, `noble` for 24.04).
 
 ## Signing Key
 

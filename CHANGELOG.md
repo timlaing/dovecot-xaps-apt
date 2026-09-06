@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning].
 - Corrected README repository URLs from the placeholder owner to `timlaing`.
 - **Rotated the APT signing key** to a passphrase-less key (`D6F4 7642 A542 4C78 332C  CD8E EAD2 766F 4E85 7693`) so `reprepro` can sign non-interactively in CI; updated `public-key.asc`, `fingerprint`, `conf/distributions`, README, and SECURITY policy.
 - **Fixed publish workflow GPG setup**: create `~/.gnupg`, configure loopback pinentry (`gpg-agent.conf` / `gpg.conf`), and install `pinentry-curses`.
+- **Renamed the APT suites after the Ubuntu releases they target**: `stable` → `resolute` (Ubuntu 26.04, Dovecot 2.4) and `stable-dov23` → `noble` (Ubuntu 24.04, Dovecot 2.3). Each suite stays self-contained (matching plugin build plus the daemon); the old `stable`/`stable-dov23` dists are dropped from the snapshot.
 
 ### Fixed
 
