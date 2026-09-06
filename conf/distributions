@@ -6,3 +6,12 @@ Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps
 SignWith: D6F47642A5424C78332CCD8EEAD2766F4E857693
+
+Origin: dovecot-xaps
+Label: dovecot-xaps
+Codename: stable-dov23
+Suite: stable-dov23
+Architectures: amd64 arm64
+Components: main
+Description: Debian packages for dovecot-xaps (Dovecot 2.3)
+SignWith: D6F47642A5424C78332CCD8EEAD2766F4E857693
