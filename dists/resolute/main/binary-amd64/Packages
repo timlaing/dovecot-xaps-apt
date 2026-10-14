@@ -3,18 +3,18 @@ Architecture: amd64
 Depends: dovecot-core (>= 2.4.0), xapsd, libc6
 Priority: optional
 Section: mail
-Filename: pool/main/d/dovecot-xaps-plugin/dovecot-xaps-plugin_1.1.0-1_amd64.deb
-Size: 15070
-SHA256: 436b096634f379775ef8f73c42cf490040843afd6e748f8abac9b1ee86348869
-SHA1: 481d423657372a01a3bd54f0c2d131b2ce91a98c
-MD5sum: 5f5175e322af00f5f5071fda3af670d1
+Filename: pool/main/d/dovecot-xaps-plugin/dovecot-xaps-plugin_1.1.1-1_amd64.deb
+Size: 15552
+SHA256: 535427aceac1c7df4de826431d7d48c37790ff6d597abefd3d8d7d51a8cd5ddc
+SHA1: 072a6adf14ffbd4f90981642bd9a814b9547e7fd
+MD5sum: 1de24c347ada1e0aa16277c4eed2785c
 Description: Apple push notification plugins for Dovecot
  Dovecot plugins implementing the XAPPLEPUSHSERVICE IMAP extension and
  forwarding mail events to the companion xapsd APNS daemon.
 Homepage: https://github.com/timlaing/dovecot-xaps-plugin
 Maintainer: dovecot-xaps-plugin contributors <noreply@github.com>
-Version: 1.1.0-1
-Installed-Size: 104
+Version: 1.1.1-1
+Installed-Size: 105
 
 Package: xapsd
 Version: 1.4.1

@@ -5,44 +5,44 @@ Origin: dovecot-xaps
 Label: dovecot-xaps
 Suite: resolute
 Codename: resolute
-Date: Sun, 06 Sep 2026 13:54:43 UTC
+Date: Wed, 14 Oct 2026 14:07:59 UTC
 Architectures: amd64 arm64
 Components: main
 Description: Debian packages for dovecot-xaps
 MD5Sum:
- c6c05fe0f378266ae13d9350b9028f58 1527 main/binary-amd64/Packages
- 80787fcbab59449a1bdbc1dc307eec42 773 main/binary-amd64/Packages.gz
+ b05f22f62d54363f8bac72aefcb560b0 1527 main/binary-amd64/Packages
+ d8862ad57310cc57f8de81d7c17b5b50 773 main/binary-amd64/Packages.gz
  6d398a0f0682efb929c1e3fe5ba65bce 141 main/binary-amd64/Release
- b514b04299418860c04075740424f3f7 1510 main/binary-arm64/Packages
- 123b1b24b2c829f0fa4c4fa119d66448 769 main/binary-arm64/Packages.gz
+ 1b3ba0bd24de6939bf01bf350c58ab67 1510 main/binary-arm64/Packages
+ b28e8d6a3e48b11aac7ceb1c6549352e 763 main/binary-arm64/Packages.gz
  9b1aad6ae05615ddc078aa3ee1ad9427 141 main/binary-arm64/Release
 SHA1:
- 20df7a69de8221afcbb2379516ef872b31c7256e 1527 main/binary-amd64/Packages
- 5de24e771a93c7edbdb731bbac9f23594c686976 773 main/binary-amd64/Packages.gz
+ 9c9802e6af4e809ef3a1552ab234286e43a48992 1527 main/binary-amd64/Packages
+ 3bbb68c15a004efe2ab3e00b81d5d9b04aeaad93 773 main/binary-amd64/Packages.gz
  b3930a359d3addf2b3f995f3c3699b3c8429a793 141 main/binary-amd64/Release
- 3f1bc55e661580424f7653f9360a643df56b9f96 1510 main/binary-arm64/Packages
- f227673eec2c035ed849bd84095484b3198534e7 769 main/binary-arm64/Packages.gz
+ 6e61ab6b21c358887e68d075e2f7fcdb4e632ab8 1510 main/binary-arm64/Packages
+ 0963fff5c996e645f4fa6dab16b5247809d0aed7 763 main/binary-arm64/Packages.gz
  8abb69017b1beecf88612510c253b538b11b6de9 141 main/binary-arm64/Release
 SHA256:
- b0297ae59feca5beddaaf95ad7913582463e4ad921f86bef33384c5c71fd17fe 1527 main/binary-amd64/Packages
- 7c67392fa39b94576076018d4e1f2d4521fcea1da6a26fc872b2dc2517c2b11c 773 main/binary-amd64/Packages.gz
+ 9fb8f867215cca5f7fefce487938c959a5b1927f8dc3523fa7828a0317002d3a 1527 main/binary-amd64/Packages
+ 737071abe9bcbb674d55d3764453db7de45f0b0a9a9a0efab10705a7d6a0c123 773 main/binary-amd64/Packages.gz
  8510ed448232717b06d81f121779716c542cd398875cd9a9aa9a18c0ec8b29fe 141 main/binary-amd64/Release
- 9ba26ac084019b49f6fc4a59f1fc5f6c90639f9665746f906a7a3ef0f999530c 1510 main/binary-arm64/Packages
- b45566901974aedb5c456b34b50265602edf036e93088df929f37706db64bf69 769 main/binary-arm64/Packages.gz
+ 03d822e2707f6e8b129f36696b5d21cc162895d1f6dd9efac9de86e7fc61e964 1510 main/binary-arm64/Packages
+ ad7a08975f795210065056ac6f4dca9b964573a61b341201420448475c508d82 763 main/binary-arm64/Packages.gz
  56d4a4b7a51eb4ed315118dd9cea6259b5d716f8e42239adcd9f1bc217545446 141 main/binary-arm64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE1vR2QqVCTHgzLM2O6tJ2b06FdpMFAmqdcKMACgkQ6tJ2b06F
-dpP7VRAAj+8kcxLfW64133jj9wMPCCCE7FCnv4tliRtLX8UuxQioAUzf0oD7Pn0H
-KtPSKonnlI++12O6rw3ml7Q5QSPTDnXt3RVp73A5/TzUVgBgKty3HKeqgg+GGP8Z
-cMEVf8b33QrkzIoujX5rCiDofmzduHrzbxxVaHaARmLlmKDVmImuo889Sc7ai/df
-4qSklnVR/jJy0bscvgHbLWN9mlXYx5/Co8NcglOJza1DOao25bzPvIGfaVHoUAXe
-2fcWOjBFtD7p+P1DS7S2LnXbKYO4QVF0S6t+ny5xujMtG4C/uyU1yZUCpKOCKTKp
-PjbxyQkqeg0ISFLgM2if80qGz5hYEYJ0GTm5ci2e9Jf4JxM4jrSLM7lmwMEmmpiE
-PSSCkoQ+yeMXSOEoB0ZnoxYAwk1Xe8cEZmoPPOTYO70mOMnkXXRBQX5jlla2FLvK
-XMuGh8e050W9d72cOdi4ULROV36Gh6HzAyrjUd9OwZrTg+jcYsTXf43En6TKVodI
-T4wmc9tvkfaEwt2gNvKQVWYseUNzJH2QVf069Syz9cbwWVKh9xk9Ln+/iawLEI9F
-z65b7p0qmJx8eu13Wcc5ZnxcUt+TuqVkrGNM9ZmE9A3nWI4Q1ChxGjLcB49n7tVy
-X5CpcAS3gy2g4Zb0oPYTy6AaEsNXX0ymltubCdReWtHbecOYIoM=
-=LND+
+iQIzBAEBCgAdFiEE1vR2QqVCTHgzLM2O6tJ2b06FdpMFAmrPjL8ACgkQ6tJ2b06F
+dpN1lxAAx0WQ2/X3GyFANGzdpoLUaSWXs2tYVjMsqiJFm9AirCOWxEVdk/dn+st8
+lcGjDAB+8JD+4w/pmtnDYDGdcFvrQEMUGWsilzaCPhypKmhZZV5ZYHOiu1j24pUN
+LOo317arS6fAYU9njLSZiqTPBaNxCN+E2rYLBOwgtclQLjXzBVHyNcCecHT9PY1Y
+/lwuTufAA0pwTgSUd9AoJJD3PTNaQoxYsdkOKeKhfBCpddypKGz9o0bGPQWCumyl
+NURwUteE8ikIm7rkI+ERRKj/XzlzLm4dJ92xrq/pCa6yhEZnikxqFSzn4+vrtGsJ
+2MDInHV+kv93PnuX3BIYkDxOT3KkgnU8qXFvShedLVL193V45wRDeYTNV+TDM7nm
+H8SYOUGZjLj9Y+kXgJrEEwJhCcmq+X3moaehDPNX5Mznj5AluedOgPL4SeORrdix
+Ov0a/sZ2Jssz8Hter7CkimB9beHwPZSKkucuUKAsGlrfrIzySY01aZcpasFC/vw4
+2fElqs5Q6kJXGFO4kDRzfcaMF8rV2JzQbaVwaT1yCddK04dic/y1bQOqQdv+wPAh
+NgSW8ODyx6hpRul3OX79y7KutM2ks6MF6YEn4mnVmcU9NUxz+5SLsBGsk/26Xj4l
+e9pvThUMHRVrSjuNERM657G+mZ5u/1lFWTDZvGc9YzuvGdeYN7w=
+=wwzd
 -----END PGP SIGNATURE-----
