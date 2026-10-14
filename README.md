@@ -1,7 +1,6 @@
 # dovecot-xaps-apt
 
 [![License](https://img.shields.io/github/license/timlaing/dovecot-xaps-apt)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/timlaing/dovecot-xaps-apt)](https://github.com/timlaing/dovecot-xaps-apt/releases)
 [![Check](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/checks.yml/badge.svg)](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/checks.yml)
 [![CodeQL](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/codeql.yml/badge.svg)](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/codeql.yml)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c)](https://github.com/timlaing/dovecot-xaps-apt/security/dependabot)
