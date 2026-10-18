@@ -5,19 +5,6 @@
 [![CodeQL](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/codeql.yml/badge.svg)](https://github.com/timlaing/dovecot-xaps-apt/actions/workflows/codeql.yml)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c)](https://github.com/timlaing/dovecot-xaps-apt/security/dependabot)
 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=coverage)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=bugs)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=timlaing_dovecot-xaps-apt&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=timlaing_dovecot-xaps-apt)
-
 APT repository for Apple push notification support in Dovecot. Packages are
 built and released from the [dovecot-xaps-plugin](https://github.com/timlaing/dovecot-xaps-plugin)
 and [dovecot-xaps-daemon](https://github.com/timlaing/dovecot-xaps-daemon) source repositories.
