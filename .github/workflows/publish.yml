@@ -278,7 +278,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/pages
-          cp -r dists pool conf public-key.asc /tmp/pages/
+          cp -r dists pool conf public-key.asc index.html /tmp/pages/
           touch /tmp/pages/.nojekyll
 
       - name: Ensure no private keys in artifact

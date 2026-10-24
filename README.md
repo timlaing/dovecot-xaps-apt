@@ -9,6 +9,10 @@ APT repository for Apple push notification support in Dovecot. Packages are
 built and released from the [dovecot-xaps-plugin](https://github.com/timlaing/dovecot-xaps-plugin)
 and [dovecot-xaps-daemon](https://github.com/timlaing/dovecot-xaps-daemon) source repositories.
 
+The published repository homepage redirects to the combined
+[Dovecot XAPS documentation](https://dovecot-xaps.readthedocs.io/).
+Package indexes, downloads, and the public signing key keep their existing URLs.
+
 ## Changelog
 
 See [`CHANGELOG.md`](CHANGELOG.md) for a history of changes.
