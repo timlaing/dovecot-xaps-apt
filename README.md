@@ -12,6 +12,8 @@ and [dovecot-xaps-daemon](https://github.com/timlaing/dovecot-xaps-daemon) sourc
 The published repository homepage redirects to the combined
 [Dovecot XAPS documentation](https://dovecot-xaps.readthedocs.io/).
 Package indexes, downloads, and the public signing key keep their existing URLs.
+Homepage and publishing-workflow changes on `main` automatically republish the site.
+A manual publish without release tags republishes the committed package snapshot.
 
 ## Changelog
 
