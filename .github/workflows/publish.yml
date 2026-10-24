@@ -5,6 +5,11 @@ name: Publish APT Repository
 # automatically via repository_dispatch from the source release workflows.
 # yamllint disable-line rule:truthy
 on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - .github/workflows/publish.yml
   workflow_dispatch:
     inputs:
       plugin_ref:
@@ -274,15 +279,13 @@ jobs:
           fi
 
       - name: Stage Pages artifact
-        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           set -euo pipefail
           mkdir -p /tmp/pages
-          cp -r dists pool conf public-key.asc /tmp/pages/
+          cp -r dists pool conf public-key.asc index.html /tmp/pages/
           touch /tmp/pages/.nojekyll
 
       - name: Ensure no private keys in artifact
-        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         run: |
           set -euo pipefail
           set +e
@@ -300,12 +303,10 @@ jobs:
           fi
 
       - name: Upload Pages artifact
-        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         uses: actions/upload-pages-artifact@v5
         with:
           path: /tmp/pages
 
       - name: Deploy to GitHub Pages
-        if: ${{ github.event_name == 'repository_dispatch' || inputs.plugin_ref != '' || inputs.daemon_ref != '' }}
         id: deployment
         uses: actions/deploy-pages@v5
