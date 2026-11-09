@@ -7,8 +7,6 @@ name: Reconcile APT Repository
 # source release workflows is the primary path; this covers missed dispatches.
 # yamllint disable-line rule:truthy
 on:
-  schedule:
-    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
