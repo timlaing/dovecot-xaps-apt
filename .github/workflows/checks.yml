@@ -1,6 +1,8 @@
 name: Check
 
 "on":
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -22,12 +24,29 @@ jobs:
           persist-credentials: false
 
       - name: Run the check
+        if: github.event_name == 'pull_request'
         run: python3 -m scripts.check.edits
+
+  integrity:
+    name: APT repository integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install repository validator
+        run: sudo apt-get update && sudo apt-get install --yes reprepro
+      - name: Validate committed package indexes and checksums
+        run: reprepro --basedir . check
 
   validation-result:
     name: Validate checks
     needs:
       - editable
+      - integrity
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
