@@ -36,7 +36,9 @@ jobs:
       - name: Install repository validator
         run: sudo apt-get update && sudo apt-get install --yes reprepro
       - name: Validate committed package indexes and checksums
-        run: reprepro --basedir . check
+        run: |
+          reprepro --basedir . check
+          reprepro --basedir . checkpool
   validation-result:
     name: Validate checks
     needs:
