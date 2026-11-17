@@ -88,6 +88,7 @@ jobs:
             sonar.javascript.lcov.reportPaths=./coverage-workflow/javascript.lcov
             sonar.tests=.github/scripts
             sonar.test.inclusions=**/test_*.py,**/*.test.*,**/tests/**
+            sonar.exclusions=**/test_*.py,**/*.test.*,coverage-workflow/**
           HEAD_SHA: ${{ steps.metadata.outputs.head-sha }}
           RUN_EVENT: ${{ steps.metadata.outputs.event }}
           PR_NUMBER: ${{ steps.metadata.outputs.number }}
@@ -146,6 +147,7 @@ jobs:
                   report.write(target, encoding='utf-8', xml_declaration=True)
           Path('sonar-project.properties').unlink(missing_ok=True)
           settings = os.environ['SCANNER_SETTINGS']
+          settings += 'sonar.working.directory=' + str(Path(os.environ.get('RUNNER_TEMP', str(Path(os.environ['SETTINGS']).parent))) / 'sonar-work') + '\n'
           if os.environ['RUN_EVENT'] == 'pull_request':
               for key, value in [('key', os.environ['PR_NUMBER']), ('branch', os.environ['PR_BRANCH']), ('base', os.environ['BASE_BRANCH'])]:
                   if '${' in value:
@@ -163,7 +165,7 @@ jobs:
         with:
           args:
             -Dproject.settings=${{ runner.temp }}/analysis.properties -Dsonar.scm.revision=${{ steps.metadata.outputs.head-sha
-            }} -Dsonar.working.directory=${{ runner.temp }}/sonar-work -Dsonar.branch.name=main
+            }} -Dsonar.branch.name=main
       - name: Scan pull request
         if: steps.metadata.outputs.event == 'pull_request'
         uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 # v8.4.1
@@ -173,7 +175,7 @@ jobs:
         with:
           args:
             -Dproject.settings=${{ runner.temp }}/analysis.properties -Dsonar.scm.revision=${{ steps.metadata.outputs.head-sha
-            }} -Dsonar.working.directory=${{ runner.temp }}/sonar-work
+            }}
       - name: Publish analysis result
         if: always() && steps.metadata.outputs.head-sha != ''
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
