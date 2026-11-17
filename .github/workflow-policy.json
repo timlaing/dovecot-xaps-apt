@@ -5,7 +5,8 @@
     "Validate codeql",
     "Analysis passed",
     "Workflow policy",
-    "Review passed"
+    "Review passed",
+    "Review notifier policy"
   ],
   "review_gate_requires_main": true,
   "sha_pinning_required": true,
@@ -13,6 +14,7 @@
     "Validate checks",
     "Validate codeql",
     "Analysis passed",
-    "Workflow policy"
+    "Workflow policy",
+    "Review notifier policy"
   ]
 }
